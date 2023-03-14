@@ -193,14 +193,14 @@ tests-no-zope = ["cloudpickle", "cloudpickle", "hypothesis", "hypothesis", "mypy
 
 [[package]]
 name = "ccxt"
-version = "2.8.69"
+version = "2.9.9"
 description = "A JavaScript / Python / PHP cryptocurrency trading library with support for 130+ exchanges"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "ccxt-2.8.69-py2.py3-none-any.whl", hash = "sha256:aa85bbf3c0a018f9b7d91143a7254a3a84f77c8b2659d04cc77755dbf54887bf"},
-    {file = "ccxt-2.8.69.tar.gz", hash = "sha256:b575b0995feb8d36f042b28d850c5d10f5a0656bd319bada3baa5fd044d98726"},
+    {file = "ccxt-2.9.9-py2.py3-none-any.whl", hash = "sha256:116da1a76549190b526923486a7acda064046716dbc75e09b158cf441d34d858"},
+    {file = "ccxt-2.9.9.tar.gz", hash = "sha256:f1c6e31b4fc16a9c89f18a38af1fa31db7ae6b318eafcda9677d4a13282c26c1"},
 ]
 
 [package.dependencies]
@@ -1525,4 +1525,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "67b7c36f1f592a0c3edcc7c9902208e0bedc5d34a9f2b37ca03252349b88cc63"
+content-hash = "4eeb68e22f5581bc0001ae156764090d92aacbc79c78d5da22318778140d4b5f"
