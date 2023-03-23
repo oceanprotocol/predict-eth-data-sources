@@ -39,6 +39,10 @@ class DataService:
                         limit=200,
                         params=params,
                     )
+
+                    if len(unformatted_response) == 0:
+                        print("Empty response from CCXT: " + symbol + "/USD")
+                        break
                 except BadSymbol as e:
                     print(e)
                     break

@@ -52,6 +52,7 @@ def merged_dataset(
     print("Fetching prices...")
     prices = data_service.retrieve_ohlcv(start_date, end_date, timeframe).reset_index()
     end_date = prices["date"].max()
+    start_date = prices["date"].min()
     print("Fetching liquidity...")
     print(start_date, end_date, timeframe)
     liquidity = transpose_service.retrieve_liquidity(start_date, end_date, timeframe).reset_index()
@@ -61,15 +62,15 @@ def merged_dataset(
     gas = transpose_service.retrieve_gas_price(start_date, end_date, timeframe).reset_index()
 
     merged = prices.merge(
-        liquidity, left_on=["date", "symbol"], right_on=["datetime", "contract_symbol"], how="left", validate="one_to_one"
+        liquidity.drop_duplicates(), left_on=["date", "symbol"], right_on=["datetime", "contract_symbol"], how="left",
     )
     merged.drop(["contract_symbol", "datetime"], axis=1, inplace=True)
     merged = merged.merge(
-        volumes, left_on=["date", "symbol"], right_on=["datetime", "contract_symbol"], how="left", validate="one_to_one"
+        volumes.drop_duplicates(), left_on=["date", "symbol"], right_on=["datetime", "contract_symbol"], how="left",
     )
     merged.drop(["contract_symbol", "datetime"], axis=1, inplace=True)
     merged = merged.merge(
-        gas, left_on=["date"], right_on=["datetime"], how="left", validate="many_to_one"
+        gas.drop_duplicates(), left_on=["date"], right_on=["datetime"], how="left",
     )
     merged.drop(["datetime"], axis=1, inplace=True)
     sorted_df = merged.sort_values(by=["symbol", "date"], ascending=True)
