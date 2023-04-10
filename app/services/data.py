@@ -9,10 +9,10 @@ import ccxt
 import pytz
 import pandas as pd
 
-class DataService:
 
+class DataService:
     def __init__(self):
-        self.exchange = ccxt.binance()    
+        self.exchange = ccxt.kraken()
 
     def retrieve_ohlcv(self, start_date, end_date, timeframe):
         seconds_per_unit = {"s": 1, "m": 60, "h": 3600, "d": 86400, "w": 604800}
@@ -24,7 +24,7 @@ class DataService:
             unformatted_response = []
             current_date = start_date
 
-            while (current_date <= end_date):
+            while current_date <= end_date:
 
                 if (end_date - current_date).days < 200:
                     params = {"until": int(end_date.timestamp() * 1000)}
@@ -46,7 +46,6 @@ class DataService:
                 except BadSymbol as e:
                     print(e)
                     break
-                    
 
                 current_date = datetime.fromtimestamp(
                     unformatted_response[-1][0] / 1000, timezone.utc
@@ -56,12 +55,16 @@ class DataService:
                     break
 
             # transform data
-            df = pd.DataFrame(unformatted_response, columns=["date", "open", "high", "low", "close", "volume"])
-            df.index = df["date"].apply(lambda timestamp: datetime.fromtimestamp(timestamp / 1000, pytz.utc))
+            df = pd.DataFrame(
+                unformatted_response,
+                columns=["date", "open", "high", "low", "close", "volume"],
+            )
+            df.index = df["date"].apply(
+                lambda timestamp: datetime.fromtimestamp(timestamp / 1000, pytz.utc)
+            )
             df.drop(["date"], axis=1, inplace=True)
             df["symbol"] = symbol + "/USDC"
 
             formatted_response.append(df)
 
         return pd.concat(formatted_response)
-
