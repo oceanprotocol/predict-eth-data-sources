@@ -34,7 +34,7 @@ This API uses Transpose under the hood, so an API KEY is needed for the applicat
 
 ### Endpoints & Usage
 
-The following endpoints are created in the API:
+The API can be accessed at https://predict-eth-data.oceanprotocol.com. The following endpoints are created in the API:
 
 * `/ccxt/price-history/ohlcv` --> Retrieves only OHLCV data
 * `/transpose/exchange-liquidity/uniswap` --> Retrieves only liquidity data
