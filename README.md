@@ -49,7 +49,7 @@ All the endpoints receive three query params which are:
 
 The following is an example cURL:
 ```
-$ curl --get --data-urlencode "start_date=2023-03-06T15:53:00+05:00"  "localhost:8000/merged?timeframe=1h"
+$ curl --get --data-urlencode "start_date=2023-03-06T15:53:00+05:00"  "https://predict-eth-data.oceanprotocol.com/merged?timeframe=1h"
 ```
 
 
